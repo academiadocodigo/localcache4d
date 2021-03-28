@@ -69,7 +69,7 @@ var
 begin
   Result := Self;
   if aDabaseName = '' then
-    LFileName := ChangeFileExt(ParamStr(0), '.ini')
+    LFileName := ChangeFileExt(ParamStr(0), '.lc4')
   else
     LFileName := ChangeFileExt(ExtractFilePath(ParamStr(0)) + aDabaseName, '.ini');
   LKeys := TStringList.Create;
@@ -111,7 +111,7 @@ var
 begin
   Result := Self;
   if aDabaseName = '' then
-    LFileName := ChangeFileExt(ParamStr(0), '.ini')
+    LFileName := ChangeFileExt(ParamStr(0), '.lc4')
   else
     LFileName := ChangeFileExt(ExtractFilePath(ParamStr(0)) + aDabaseName, '.ini');
   if not FileExists(LFileName) then
