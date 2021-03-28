@@ -66,8 +66,6 @@ var
   LKeys: TStringList;
   LKey: string;
   LValue : String;
-  Stream : TStringStream;
-  lResult: String;
 begin
   Result := Self;
   if aDabaseName = '' then
@@ -110,8 +108,6 @@ var
   LFileName: string;
   LValuePair: TPair<string, string>;
   LFileTmp: TextFile;
-  aValue : String;
-  Stream : TStringStream;
 begin
   Result := Self;
   if aDabaseName = '' then
