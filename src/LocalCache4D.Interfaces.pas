@@ -11,6 +11,7 @@ type
     function LoadDatabase ( aDabaseName : String = '' ) : iLocalCache4D;
     function SaveToStorage (aDabaseName : String = '' ) : iLocalCache4D;
     function Instance ( aValue : String ) : iLocalCache4D;
+    function RemoveInstance ( aValue : String ) : iLocalCache4D;
     function ListItens : TDictionary<string, string>;
     function ListInstances : TDictionary<String, TDictionary<string, string>>;
     function TryGetItem (aItem : String; out aResult : String) : Boolean;
