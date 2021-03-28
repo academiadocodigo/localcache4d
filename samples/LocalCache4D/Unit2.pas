@@ -27,6 +27,10 @@ type
     ValueListEditor1: TValueListEditor;
     aListItens: TButton;
     Button5: TButton;
+    ListBox1: TListBox;
+    LabeledEdit1: TLabeledEdit;
+    Button6: TButton;
+    Button7: TButton;
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -36,9 +40,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ValueListEditor1Click(Sender: TObject);
+    procedure ListBox1Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
     procedure ListItems;
+    procedure ListInstances;
   public
     { Public declarations }
   end;
@@ -57,6 +65,7 @@ end;
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
+  LocalCache.Instance(LabeledEdit1.Text);
   LocalCache.SetItem(LabeledEdit2.Text, LabeledEdit3.Text);
   ListItems();
 end;
@@ -82,10 +91,22 @@ begin
   ListItems();
 end;
 
+procedure TForm2.Button6Click(Sender: TObject);
+begin
+  LocalCache.Instance(LabeledEdit1.Text);
+end;
+
+procedure TForm2.Button7Click(Sender: TObject);
+begin
+  LocalCache.RemoveInstance(LabeledEdit1.Text);
+  ListInstances;
+end;
+
 procedure TForm2.FormCreate(Sender: TObject);
 begin
   LocalCache.LoadDatabase();
-  ListItems();
+  ListInstances;
+  //ListItems();
 end;
 
 procedure TForm2.FormDestroy(Sender: TObject);
@@ -93,8 +114,26 @@ begin
   LocalCache.SaveToStorage();
 end;
 
+procedure TForm2.ListBox1Click(Sender: TObject);
+begin
+  ListItems;
+  LabeledEdit1.Text := ListBox1.Items[ListBox1.ItemIndex];
+end;
+
+procedure TForm2.ListInstances;
+begin
+  ListBox1.Clear;
+  for var Instances in LocalCache.ListInstances do
+    ListBox1.AddItem(Instances.Key, Instances.Value);
+
+  if LabeledEdit1.Text <> '' then
+    ListBox1.Items.IndexOf(LabeledEdit1.Text);
+end;
+
 procedure TForm2.ListItems;
 begin
+  //ListInstances;
+  LocalCache.Instance(ListBox1.Items[ListBox1.ItemIndex]);
   ValueListEditor1.Strings.Clear;
   for var Item in LocalCache.ListItens do
       ValueListEditor1.InsertRow(Item.Key, Item.Value, True);
