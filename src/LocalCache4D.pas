@@ -31,9 +31,8 @@ uses
   System.IniFiles,
   System.Classes,
   System.SysUtils,
-  System.NetEncoding,
   System.JSON,
-  System.IOUtils;
+  System.IOUtils, LocalCache4D.Compression;
 const
   C_SECTION = 'LOCALCACHEDATABASE';
 { TLocalCache4D }
@@ -85,7 +84,7 @@ begin
 
   if FileExists(LFileName) then
   begin
-    JSONValue :=  TJSONObject.ParseJSONValue(TNetEncoding.Base64.Decode(TNetEncoding.Base64.Decode(TFile.ReadAllText(LFileName)))) as TJSONObject;
+    JSONValue :=  TJSONObject.ParseJSONValue(TLocalCache4DCompreesion.Decode(TFile.ReadAllText(LFileName))) as TJSONObject;
     try
        for i := 0 to Pred(JSONValue.Count) do
        begin
@@ -152,7 +151,7 @@ begin
 
     StrList := TStringList.Create;
     try
-      StrList.Add(TNetEncoding.Base64.Encode(TNetEncoding.Base64.Encode(LJsonFile.ToString)));
+      StrList.Add(TLocalCache4DCompreesion.Encode(LJsonFile.ToString));
       StrList.SaveToFile(LFileName, TEncoding.Unicode);
     finally
       StrList.DisposeOf;
