@@ -39,7 +39,7 @@ O LocalCache4D trabalha de forma Singleton, então basta adicionar a uses necess
 LocalCache
 ```
 
-## ⚡️ Como Carregar o Banco de Dados
+## Como Carregar o Banco de Dados
 
 Se você não definir um nome de arquivo ao chamar o método LoadDatabase, ele automaticamente criara um banco com a extensão .lc4 como o mesmo nome da sua aplicação dentro da pasta do exe. 
 
@@ -49,7 +49,7 @@ Caso você desejar criar o banco em um local diferente é preciso informar todo 
 LocalCache.Database('Caminho do Banco'); //Se você não passar nenhum parametro ele cria o banco na mesma pasta da aplicação
 ```
 
-## ⚡️ Setar um Dado para o Banco em Memória
+## Setar um Dado para o Banco em Memória
 
 Para setar um dado para o Cache é necessário antes informar a instancia que você deseja que ele seja salvo, a instancia é como se fosse a sua tabela e/ou collection e dentro dela irá conter os registros Chave e Valor, você pode setar quantas instancias desejar;
 
@@ -57,25 +57,25 @@ Para setar um dado para o Cache é necessário antes informar a instancia que vo
  LocalCache.Instance('Nome da Instancia').SetItem('Chave', 'Valor');
  ```
  
- ## ⚡️ Buscar um Registro no Cache
+ ## Buscar um Registro no Cache
 
 ```pascal
  LocalCache.Instance('Nome da Instancia').GetItem('Chave');
  ```
  
- ## ⚡️ Remover um Registro no Cache
+ ## Remover um Registro no Cache
 
 ```pascal
  LocalCache.Instance('Nome da Instancia').RemoveItem('Chave');
  ```
  
- ## ⚡️ Remover uma Instancia e todos os seus Registros
+ ## Remover uma Instancia e todos os seus Registros
 
 ```pascal
  LocalCache.RemoveInstance('Nome da Instancia');
  ```
  
-  ## ⚡️ Persistir o Cache no Disco Local
+  ## Persistir o Cache no Disco Local
 
 Você pode salvar os dados do Cache no Disco Local e carrega-los novamente a qualquer momento com o LoadDataBase, para persistir os dados você deve chamar o comando abaixo, caso você não passe nenhum parametro para o Método SaveToStorage ele irá criar o banco com a extensão .lc4 na mesma pasta do executavel da sua aplicação e com o mesmo nome dela.
 
