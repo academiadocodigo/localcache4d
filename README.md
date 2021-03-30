@@ -8,6 +8,9 @@
   <img src="https://img.shields.io/github/v/release/bittencourtthulio/localcache4d?style=flat-square">
   <img src="https://img.shields.io/github/stars/bittencourtthulio/localcache4d?style=flat-square">
   <img src="https://img.shields.io/github/contributors/bittencourtthulio/localcache4d?color=orange&style=flat-square">
+  <img src="https://tokei.rs/b1/github/bittencourtthulio/localcache4d?category=lines">
+  <img src="https://tokei.rs/b1/github/bittencourtthulio/localcache4d?category=code">
+  <img src="https://tokei.rs/b1/github/bittencourtthulio/localcache4d?category=files">
 </p>
 
 # localcache4d
