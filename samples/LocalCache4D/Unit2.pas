@@ -14,7 +14,9 @@ uses
   Vcl.Dialogs,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  LocalCache4D, Vcl.Grids, Vcl.ValEdit;
+  LocalCache4D,
+  Vcl.Grids,
+  Vcl.ValEdit;
 
 type
   TForm2 = class(TForm)
@@ -67,8 +69,7 @@ end;
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
-  LocalCache.Instance(LabeledEdit1.Text);
-  LocalCache.SetItem(LabeledEdit2.Text, LabeledEdit3.Text);
+  LocalCache.Instance(LabeledEdit1.Text).SetItem(LabeledEdit2.Text, LabeledEdit3.Text);
   ListItems();
 end;
 
@@ -90,7 +91,7 @@ end;
 
 procedure TForm2.Button5Click(Sender: TObject);
 begin
-  LocalCache.RemoveItem(LabeledEdit2.Text);
+  LocalCache.Instance(LabeledEdit1.Text).RemoveItem(LabeledEdit2.Text);
   ListItems();
 end;
 

@@ -40,6 +40,7 @@ constructor TLocalCache4D.Create;
 begin
   FCacheList := TDictionary<string, string>.Create;
   FInstanceList := TDictionary<string, TDictionary<string, string>>.Create;
+  FInstance := 'default';
 end;
 destructor TLocalCache4D.Destroy;
 begin
@@ -49,11 +50,14 @@ begin
   FInstanceList.DisposeOf;
   inherited;
 end;
+
+
 function TLocalCache4D.GetItem(aItem: String): string;
 begin
+  if Trim(FInstance) = '' then FInstance := 'default';
   Result := FInstanceList.Items[FInstance].Items[aItem];
-  //Result := FCacheList.Items[aItem];
 end;
+
 function TLocalCache4D.Instance(aValue: String): iLocalCache4D;
 begin
   Result := Self;
@@ -67,6 +71,7 @@ end;
 
 function TLocalCache4D.ListItens: TDictionary<string, string>;
 begin
+  if Trim(FInstance) = '' then FInstance := 'default';
   Result := FInstanceList.Items[FInstance];
 end;
 function TLocalCache4D.LoadDatabase( aDabaseName : String = '' ) : iLocalCache4D;
@@ -124,6 +129,7 @@ end;
 function TLocalCache4D.RemoveItem(aKey: String): iLocalCache4D;
 begin
   Result := Self;
+  if Trim(FInstance) = '' then FInstance := 'default';
   FInstanceList.Items[FInstance].Remove(aKey);
 end;
 function TLocalCache4D.SaveToStorage(aDabaseName : String = '' ) : iLocalCache4D;
@@ -164,6 +170,7 @@ end;
 function TLocalCache4D.SetItem(aKey, aValue: String): iLocalCache4D;
 begin
   Result := Self;
+  if Trim(FInstance) = '' then FInstance := 'default';
   if not FInstanceList.ContainsKey(FInstance) then
     FInstanceList.Add(FInstance, TDictionary<string, string>.Create);
 
@@ -174,6 +181,7 @@ function TLocalCache4D.TryGetItem(aItem: String; out aResult: String): Boolean;
 begin
   Result := False;
   aResult := '';
+  if Trim(FInstance) = '' then FInstance := 'default';
   if FInstanceList.ContainsKey(FInstance) then
     Result := FInstanceList.Items[FInstance].TryGetValue(aItem, aResult);
 end;
