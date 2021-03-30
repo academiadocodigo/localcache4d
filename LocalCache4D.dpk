@@ -32,6 +32,7 @@ requires
 
 contains
   LocalCache4D.Interfaces in 'src\LocalCache4D.Interfaces.pas',
-  LocalCache4D in 'src\LocalCache4D.pas';
+  LocalCache4D in 'src\LocalCache4D.pas',
+  LocalCache4D.Compression in 'src\LocalCache4D.Compression.pas';
 
 end.
