@@ -1,2 +1,14 @@
+<p align="center">
+  <a href="https://github.com/bittencourtthulio/localcache4d/blob/master/assets/logo.fw.png">
+    <img alt="router4d" src="https://github.com/bittencourtthulio/localcache4d/blob/master/assets/logo.fw.png">
+  </a>  
+</p>
+<br>
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/bittencourtthulio/localcache4d?style=flat-square">
+  <img src="https://img.shields.io/github/stars/bittencourtthulio/localcache4d?style=flat-square">
+  <img src="https://img.shields.io/github/contributors/bittencourtthulio/localcache4d?color=orange&style=flat-square">
+</p>
+
 # localcache4d
 Estrutura de chave e valor para realização de cache temporário ou fixo na sua aplicação
