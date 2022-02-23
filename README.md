@@ -47,7 +47,7 @@ Se você não definir um nome de arquivo ao chamar o método LoadDatabase, ele a
 Caso você desejar criar o banco em um local diferente é preciso informar todo o Path do Banco.
 
 ```pascal
-LocalCache.Database('Caminho do Banco'); //Se você não passar nenhum parametro ele cria o banco na mesma pasta da aplicação
+LocalCache.LoadDatabase('Caminho do Banco'); //Se você não passar nenhum parametro ele cria o banco na mesma pasta da aplicação
 ```
 
 ## Setar um Dado para o Banco em Memória
