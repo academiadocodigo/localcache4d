@@ -13,16 +13,22 @@ type
       constructor Create;
       destructor Destroy; override;
       class function New : iLocalCache4D;
-      function LoadDatabase ( aDabaseName : String = '' ) : iLocalCache4D;
-      function SaveToStorage (aDabaseName : String = '' ) : iLocalCache4D;
-      function Instance ( aValue : String ) : iLocalCache4D;
-      function RemoveInstance ( aValue : String ) : iLocalCache4D;
-      function ListItens : TDictionary<string, string>;
-      function ListInstances : TDictionary<String, TDictionary<string, string>>;
-      function TryGetItem (aItem : String; out aResult : String) : Boolean;
-      function GetItem ( aItem : String ) : string;
-      function SetItem( aKey : String; aValue : String ) : iLocalCache4D;
-      function RemoveItem (aKey : String) : iLocalCache4D;
+      function LoadDatabase ( aDabaseName : String = '' )        : iLocalCache4D;
+      function SaveToStorage (aDabaseName : String = '' )        : iLocalCache4D;
+      function Instance ( aValue : String )                      : iLocalCache4D;
+      function RemoveInstance ( aValue : String )                : iLocalCache4D;
+      function ListItens                                         : TDictionary<string, string>;
+      function ListInstances                                     : TDictionary<String, TDictionary<string, string>>;
+      function TryGetItem (aItem : String; out aResult : String) : Boolean; overload;
+      function TryGetItem (aItem : String; out aResult : Integer): Boolean; overload;
+      function TryGetItem (aItem : String; out aResult : Boolean): Boolean; overload;
+      function GetItem ( aItem : String )                        : string; overload;
+      function GetItemAsInteger ( aItem : String )               : Integer; overload;
+      function GetItemAsBoolean ( aItem : String )               : Boolean; overload;
+      function SetItem( aKey : String; aValue : String )         : iLocalCache4D; overload;
+      function SetItem( aKey : String; aValue : Integer )        : iLocalCache4D; overload;
+      function SetItem( aKey : String; aValue : Boolean )        : iLocalCache4D; overload;
+      function RemoveItem (aKey : String)                        : iLocalCache4D;
   end;
 var
   LocalCache : iLocalCache4D;
@@ -51,11 +57,23 @@ begin
   inherited;
 end;
 
-
 function TLocalCache4D.GetItem(aItem: String): string;
 begin
   if Trim(FInstance) = '' then FInstance := 'default';
   Result := FInstanceList.Items[FInstance].Items[aItem];
+end;
+
+function TLocalCache4D.GetItemAsBoolean(aItem: String): Boolean;
+begin
+  Result := StrToBool(GetItem(aItem));
+end;
+
+function TLocalCache4D.GetItemAsInteger(aItem: String): Integer;
+var
+  LItem: string;
+begin
+  LItem  := GetItem(aItem);
+  Result := StrToIntDef(LItem, 0);
 end;
 
 function TLocalCache4D.Instance(aValue: String): iLocalCache4D;
@@ -167,6 +185,16 @@ begin
     LJsonFile.DisposeOf;
   end;
 end;
+function TLocalCache4D.SetItem(aKey: String; aValue: Boolean): iLocalCache4D;
+begin
+  Result := SetItem(aKey, BoolToStr(aValue));
+end;
+
+function TLocalCache4D.SetItem(aKey: String; aValue: Integer): iLocalCache4D;
+begin
+  Result := SetItem(aKey, IntToStr(aValue));
+end;
+
 function TLocalCache4D.SetItem(aKey, aValue: String): iLocalCache4D;
 begin
   Result := Self;
@@ -184,6 +212,26 @@ begin
   if Trim(FInstance) = '' then FInstance := 'default';
   if FInstanceList.ContainsKey(FInstance) then
     Result := FInstanceList.Items[FInstance].TryGetValue(aItem, aResult);
+end;
+
+function TLocalCache4D.TryGetItem(aItem: String; out aResult: Integer): Boolean;
+var
+  LTemp: string;
+begin
+  Result := TryGetItem(aItem, LTemp);
+
+  if Result then
+     aResult := StrToIntDef(LTemp, 0);
+end;
+
+function TLocalCache4D.TryGetItem(aItem: String; out aResult: Boolean): Boolean;
+var
+  LTemp: string;
+begin
+  Result := TryGetItem(aItem, LTemp);
+
+  if Result then
+     aResult := StrToBoolDef(LTemp, False);
 end;
 
 initialization
