@@ -1,0 +1,9 @@
+{
+  "name": "localcache4d",
+  "description": "Estrutura de chave e valor para realização de cache temporário ou fixo na sua aplicação",
+  "version": "1.0.0",
+  "homepage": "https://github.com/academiadocodigo/localcache4d",
+  "mainsrc": "src",
+  "projects": [],
+  "dependencies": {}
+}
