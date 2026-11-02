@@ -50,10 +50,10 @@ begin
 end;
 destructor TLocalCache4D.Destroy;
 begin
-  FCacheList.DisposeOf;
+  FCacheList.Free;
   for var ListCache in FInstanceList do
-    ListCache.Value.DisposeOf;
-  FInstanceList.DisposeOf;
+    ListCache.Value.Free;
+  FInstanceList.Free;
   inherited;
 end;
 
@@ -126,7 +126,7 @@ begin
          end;
        end;
     finally
-      JSONValue.DisposeOf;
+      JSONValue.Free;
     end;
   end;
 end;
@@ -178,11 +178,11 @@ begin
       StrList.Add(TLocalCache4DCompreesion.Encode(LJsonFile.ToString));
       StrList.SaveToFile(LFileName, TEncoding.Unicode);
     finally
-      StrList.DisposeOf;
+      StrList.Free;
     end;
 
   finally
-    LJsonFile.DisposeOf;
+    LJsonFile.Free;
   end;
 end;
 function TLocalCache4D.SetItem(aKey: String; aValue: Boolean): iLocalCache4D;
